@@ -1,5 +1,3 @@
-import random
-
 class bubArray:
 	def __init__(self):
 		self.w = []
@@ -33,14 +31,20 @@ class bubArray:
 				self.w[inner] = self.w[inner - 1]
 				inner -= 1
 			self.w[inner] = temp
-
-
-myArray = bubArray()
-for x in range (10, -1, -1):
-	myArray.insert(random.randrange(1, 100))
-
-myArray.display()
-
-myArray.insertSort()
-
-myArray.display()
+	def noDups(self):
+		self.insertSort()
+		curSwap = 0
+		lastKnown = 0
+		for i in range (0, self.nElems() - 1):
+			if self.w[i] != self.w[i + 1]:
+				lastKnown += 1
+			elif self.w[i] == self.w[lastKnown]:
+				self.w[i] = -1
+				lastKnown += 1
+		self.display()
+		i=0
+		while i < self.nElems():
+			if self.w[i] == -1:
+				self.w.pop(i)
+				continue
+			i += 1
